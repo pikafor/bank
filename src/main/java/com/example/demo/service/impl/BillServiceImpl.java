@@ -56,14 +56,16 @@ public class BillServiceImpl implements BillService {
         return Bill.builder()
                 .money(billPojo.getMoney())
                 .createDate(billPojo.getCreateDate())
-                .type(billPojo.getType()).build();
+                .type(billPojo.getType())
+                .build();
     }
 
     private BillPojo toPojo(Bill bill) {
         return BillPojo.builder()
                 .money(bill.getMoney())
                 .createDate(bill.getCreateDate())
-                .type(bill.getType()).build();
+                .type(bill.getType())
+                .build();
     }
 
     private String getDate() {

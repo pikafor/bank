@@ -12,5 +12,5 @@ import org.springframework.beans.factory.annotation.Value;
 public class BillPojo {
     private long money;
     private String createDate;
-    private String type;
+    private BillEnum type;
 }

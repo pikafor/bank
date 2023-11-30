@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.BillEnum;
 import com.example.demo.model.pojo.BillPojo;
 import com.example.demo.model.pojo.ClientPojo;
 import com.example.demo.service.BillService;
@@ -32,7 +31,7 @@ public class WebController {
         clientModel.addAttribute("people", clientService.getById(id));
         clientModel.addAttribute("bills", billService.getBillsByClientId(id));
         System.out.println(clientModel.toString());
-        return "index";
+        return "profile";
     }
     @GetMapping("create/client")
     public String create() {
@@ -41,21 +40,18 @@ public class WebController {
     @PostMapping("create/has_create_client")
     public String newClient(ClientPojo clientPojo, BillPojo billPojo) {
         //ClientPojo clientPojo = new ClientPojo(1L, "Ivan", "Matskevich", "25.11.2023");
-        billPojo.setType("дебетовая");
         billService.save(clientService.save(clientPojo).getId(), billPojo);
         return "redirect:/home";
     }
     @PostMapping("create/has_create_bill/debit/{clientId}")
     public String createDebitBills(@PathVariable(value = "clientId") Long clientId, BillPojo billPojo) {
         System.out.println(billPojo.toString());
-        billPojo.setType("дебетовая");
         billService.save(clientId, billPojo);
         return "redirect:/find?id=" + clientId;
     }
     @PostMapping("create/has_create_bill/credit/{clientId}")
     public String createCreditBills(@PathVariable(value = "clientId") Long clientId, BillPojo billPojo) {
         System.out.println(billPojo.toString());
-        billPojo.setType("кредитная");
         billService.save(clientId, billPojo);
         return "redirect:/find?id=" + clientId;
     }

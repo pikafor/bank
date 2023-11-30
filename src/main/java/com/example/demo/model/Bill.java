@@ -18,7 +18,8 @@ public class Bill {
     private Long id;
     private long money;
     private String createDate;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private BillEnum type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")

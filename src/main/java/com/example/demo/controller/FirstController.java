@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/bill")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class FirstController {
     private final ClientService clientService;
     private final BillService billService;
+
+    @GetMapping("/{clientId}")
+    public List<BillPojo> getBillsByClientId(@PathVariable(value = "clientId") Long clientId) {
+        return billService.getBillsByClientId(clientId);
+    }
 }
